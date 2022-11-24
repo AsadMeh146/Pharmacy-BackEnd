@@ -1,10 +1,10 @@
 import express from "express";
 import { isValidObjectId } from "mongoose";
-import Manufacturer from "../modals/Manufacturer";
+import Manufacturer from "../modals/Manufacturer.js";
 
 const router = express.Router()
 
-router.get("/" ,async (req,res)=>{
+router.get("/" ,async(req,res)=>{
     Manufacturer.find((err,docs)=>
     {
         if(!err)
@@ -38,12 +38,12 @@ router.post("/" ,async (req,res)=>{
     res.send(isregister)
 
 })
-router.put("/:id" ,(req,res)=>{
+router.put("/:id" ,async(req,res)=>{
         var manufacturer = {
             name:req.body.name,
             email:req.body.email,
             address:req.body.address,
-            phone:req.body.phone,
+            contact:req.body.contact,
         }
         Manufacturer.findByIdAndUpdate(req.params.id, {$set: manufacturer},{new:true},(err,docs)=>{
             if(!err)
@@ -56,7 +56,7 @@ router.put("/:id" ,(req,res)=>{
             }
         });  
 });
-router.delete("/:id",(req,res)=>{
+router.delete("/:id",async(req,res)=>{
     Manufacturer.findByIdAndDelete(req.params.id,(err,docs)=>
     {
         if(!err)

@@ -1,6 +1,6 @@
 import express from "express";
 import { isValidObjectId } from "mongoose";
-import Shipper from "../modals/Shipper";
+import Shipper from "../modals/Shipper.js";
 
 const router = express.Router()
 
@@ -13,7 +13,7 @@ router.get("/" ,async (req,res)=>{
         }
         else
         {
-            console.log("Error in retrieving Manufacturer : " + JSON.stringify(err,undefined,2));
+            console.log("Error in retrieving Shipper : " + JSON.stringify(err,undefined,2));
         }
     })
 
@@ -21,9 +21,9 @@ router.get("/" ,async (req,res)=>{
 
 router.post("/" ,async (req,res)=>{
     console.log("Request Received")
-    let manufacturer=new Manufacturer(req.body);
+    let shipper=new Shipper(req.body);
     let isregister
-    isregister= await manufacturer.save().then((err,res)=>{
+    isregister= await shipper.save().then((err,res)=>{
         if(err.body)
         {
             console.log("Failed")
@@ -39,25 +39,25 @@ router.post("/" ,async (req,res)=>{
 
 })
 router.put("/:id" ,(req,res)=>{
-        var manufacturer = {
+        var shipper = {
             name:req.body.name,
             email:req.body.email,
             address:req.body.address,
             phone:req.body.phone,
         }
-        Manufacturer.findByIdAndUpdate(req.params.id, {$set: manufacturer},{new:true},(err,docs)=>{
+        Shipper.findByIdAndUpdate(req.params.id, {$set: shipper},{new:true},(err,docs)=>{
             if(!err)
             {
                 res.send(docs);
             }
             else
             {
-                console.log('Error in updating manufacturer : ' + JSON.stringify(err,undefined,2));
+                console.log('Error in updating shipper : ' + JSON.stringify(err,undefined,2));
             }
         });  
 });
 router.delete("/:id",(req,res)=>{
-    Manufacturer.findByIdAndDelete(req.params.id,(err,docs)=>
+    Shipper.findByIdAndDelete(req.params.id,(err,docs)=>
     {
         if(!err)
         {
@@ -65,7 +65,7 @@ router.delete("/:id",(req,res)=>{
         }
         else
         {
-            console.log('Error in deleting manufacturer : ' + JSON.stringify(err,undefined,2));
+            console.log('Error in deleting shipper : ' + JSON.stringify(err,undefined,2));
         }
     })
 })

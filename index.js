@@ -5,6 +5,8 @@ import mongoose from './dbconnect.js'
 import routes from "./routes/route.js"
 import signUp from "./routes/signUp.js"
 import signin from "./routes/signin.js"
+import manufacturer from "./routes/manufacturer.js"
+import shipper from "./routes/shipper.js"
 
 //App Config
 const app = express();
@@ -18,6 +20,9 @@ app.use(cors());
 //Routes
 app.use("/signup",signUp)
 app.use("/signin",signin)
+app.use("/add-manufacturer",manufacturer)
+app.use("/edit-manufacturer",manufacturer)
+app.use("/add-shipper",shipper)
 
 
 // Listener

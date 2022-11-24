@@ -4,6 +4,6 @@ const manufacturerSchema=new mongoose.Schema({
     name:String,
     email:String,
     address:String,
-    phone:String,
+    contact:String,
 });
 export default mongoose.model("ManufacturerDetail",manufacturerSchema);

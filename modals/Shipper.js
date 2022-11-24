@@ -5,9 +5,8 @@ const shipperSchema=new mongoose.Schema({
     email:String,
     address:String,
     manufacturerId:{
-        type: Schema.Types.ObjectId,
-        ref: 'ManufacturerDetail'
+        type: mongoose.Schema.Types.ObjectId,ref:'ManufacturerDetail'
     },
-    phone:String,
+    contact:String,
 });
 export default mongoose.model("ShipperDetail",shipperSchema);
