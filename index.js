@@ -7,6 +7,7 @@ import signUp from "./routes/signUp.js"
 import signin from "./routes/signin.js"
 import manufacturer from "./routes/manufacturer.js"
 import shipper from "./routes/shipper.js"
+import pharmacy from "./routes/pharmacy.js"
 
 //App Config
 const app = express();
@@ -23,6 +24,7 @@ app.use("/signin",signin)
 app.use("/add-manufacturer",manufacturer)
 app.use("/edit-manufacturer",manufacturer)
 app.use("/add-shipper",shipper)
+app.use("/add-pharmacy",pharmacy)
 
 
 // Listener
