@@ -3,14 +3,9 @@ import { isValidObjectId } from "mongoose";
 import Stock from "../modals/Stock.js";
 
 const router = express.Router()
-
+// have to add pharmacy Id dynamically
 router.get("/" ,async(req,res)=>{
     Stock.aggregate([
-        {
-            $match: {
-                pharmacyId: "6380920946c6abc3c48115dc"
-            }
-        },
         {
           $lookup: {
             from: "lookups",
@@ -22,6 +17,7 @@ router.get("/" ,async(req,res)=>{
         {
           $unwind: "$category"
         },
+        { $match: { $expr : { $eq: [ '$pharmacyId' , { $toObjectId: "6380920946c6abc3c48115dc" } ] } } },
       ])
         .then((result) => {
           res.send(result);
