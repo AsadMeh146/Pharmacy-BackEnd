@@ -7,6 +7,8 @@ import signUp from "./routes/signUp.js"
 import signin from "./routes/signin.js"
 import manufacturer from "./routes/manufacturer.js"
 import shipper from "./routes/shipper.js"
+import stock from "./routes/stock.js"
+import lookup from "./routes/lookup.js";
 
 //App Config
 const app = express();
@@ -23,6 +25,12 @@ app.use("/signin",signin)
 app.use("/add-manufacturer",manufacturer)
 app.use("/edit-manufacturer",manufacturer)
 app.use("/add-shipper",shipper)
+app.use("/edit-shipper",shipper)
+app.use("/add-product",stock)
+app.use("/get-product",stock)
+app.use("/edit-product",stock)
+app.use("/add-category",lookup)
+app.use("/get-product-category",lookup)
 
 
 // Listener

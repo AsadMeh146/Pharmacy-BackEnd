@@ -1,12 +1,10 @@
 import express from "express";
 import { isValidObjectId } from "mongoose";
-import Manufacturer from "../modals/Manufacturer.js";
-import Shipper from "../modals/Shipper.js";
-
+import Lookup from "../modals/Lookup.js";
 const router = express.Router()
 
 router.get("/" ,async(req,res)=>{
-    Manufacturer.find((err,docs)=>
+    Lookup.find({Category:"PRODUCT_CATEGORY"} ,(err,docs)=>
     {
         if(!err)
         {
@@ -14,7 +12,7 @@ router.get("/" ,async(req,res)=>{
         }
         else
         {
-            console.log("Error in retrieving Manufacturer : " + JSON.stringify(err,undefined,2));
+            console.log("Error in retrieving Category : " + JSON.stringify(err,undefined,2));
         }
     })
 
@@ -22,9 +20,9 @@ router.get("/" ,async(req,res)=>{
 
 router.post("/" ,async (req,res)=>{
     console.log("Request Received")
-    let manufacturer=new Manufacturer(req.body);
+    let category=new Lookup(req.body);
     let isregister
-    isregister= await manufacturer.save().then((err,res)=>{
+    isregister= await category.save().then((err,res)=>{
         if(err.body)
         {
             console.log("Failed")
@@ -36,7 +34,7 @@ router.post("/" ,async (req,res)=>{
         }
 
     })
-    res.send(isregister)
+    console.log(isregister)
 
 })
 router.put("/:id" ,async(req,res)=>{
