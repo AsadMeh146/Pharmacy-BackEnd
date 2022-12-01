@@ -7,8 +7,12 @@ import signUp from "./routes/signUp.js"
 import signin from "./routes/signin.js"
 import manufacturer from "./routes/manufacturer.js"
 import shipper from "./routes/shipper.js"
-import stock from "./routes/stock.js"
+import pharmacy from "./routes/pharmacy.js"
+import user from "./routes/admin.js"
 import lookup from "./routes/lookup.js";
+import employee from "./routes/employee.js"
+import loan from "./routes/loan.js"
+import admin from "./routes/admin.js"
 
 //App Config
 const app = express();
@@ -25,12 +29,17 @@ app.use("/signin",signin)
 app.use("/add-manufacturer",manufacturer)
 app.use("/edit-manufacturer",manufacturer)
 app.use("/add-shipper",shipper)
-app.use("/edit-shipper",shipper)
-app.use("/add-product",stock)
-app.use("/get-product",stock)
-app.use("/edit-product",stock)
-app.use("/add-category",lookup)
-app.use("/get-product-category",lookup)
+app.use("/add-pharmacy",pharmacy)
+app.use("/view-pharmacy",pharmacy)
+app.use("/get-designation",lookup)
+app.use("/get-status",lookup)
+app.use("/get-loanstatus",lookup)
+app.use("/admin",user)
+app.use("/add-employee",employee)
+app.use("/add-loan",loan)
+app.use("/view-admin",admin)
+app.use("/view-loanapp",loan)
+app.use("/get-loan-status",lookup)
 
 
 // Listener

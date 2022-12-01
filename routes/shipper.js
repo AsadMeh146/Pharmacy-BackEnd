@@ -2,29 +2,20 @@ import express from "express";
 import { isValidObjectId } from "mongoose";
 import Shipper from "../modals/Shipper.js";
 
-
 const router = express.Router()
 
 router.get("/" ,async (req,res)=>{
-    Shipper.aggregate([
+    Shipper.find((err,docs)=>
+    {
+        if(!err)
         {
-          $lookup: {
-            from: "manufacturerdetails",
-            localField: "manufacturerId",
-            foreignField: "_id",
-            as: "manufacturerDetails"
-          }
-        },
-        {
-          $unwind: "$manufacturerDetails"
+            res.send(docs);
         }
-      ])
-        .then((result) => {
-          res.send(result);
-        })
-        .catch((error) => {
-          res.send(error);
-        });
+        else
+        {
+            console.log("Error in retrieving Shipper : " + JSON.stringify(err,undefined,2));
+        }
+    })
 
 })
 
@@ -52,8 +43,7 @@ router.put("/:id" ,(req,res)=>{
             name:req.body.name,
             email:req.body.email,
             address:req.body.address,
-            manufacturerId:req.body.manufacturerId,
-            contact:req.body.contact,
+            phone:req.body.phone,
         }
         Shipper.findByIdAndUpdate(req.params.id, {$set: shipper},{new:true},(err,docs)=>{
             if(!err)

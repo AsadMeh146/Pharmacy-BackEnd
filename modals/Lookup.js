@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const lookupSchema=new mongoose.Schema({
+const userSchema=new mongoose.Schema({
     Name:String,
-    Category:String,
+    Category:String
 });
-export default mongoose.model("Lookup",lookupSchema);
+export default mongoose.model("Lookup",userSchema);

@@ -1,84 +1,43 @@
 import express from "express";
-import { isValidObjectId } from "mongoose";
-import Lookup from "../modals/Lookup.js";
+import Lookup from "../modals/lookup.js"
+
 const router = express.Router()
 
-router.get("/" ,async(req,res)=>{
-    Lookup.find({Category:"PRODUCT_CATEGORY"} ,(err,docs)=>
-    {
-        if(!err)
-        {
-            res.send(docs);
-        }
-        else
-        {
-            console.log("Error in retrieving Category : " + JSON.stringify(err,undefined,2));
-        }
-    })
 
-})
-
-router.post("/" ,async (req,res)=>{
-    console.log("Request Received")
-    let category=new Lookup(req.body);
-    let isregister
-    isregister= await category.save().then((err,res)=>{
-        if(err.body)
-        {
-            console.log("Failed")
-            return false
-        }
+router.get("/admin-designation" , (req , res)=>{
+    Lookup.find({Category:"EMPLOYEE_DESIGNATION"} , (err , data)=>{
+        if (err){res.send(err)}
         else{
-            console.log("Added successfully")
-            return true
+            res.send(data);
+            console.log(data)
+            console.log("Done")
         }
-
-    })
-    console.log(isregister)
-
+    }
+    )
 })
-router.put("/:id" ,async(req,res)=>{
-        var manufacturer = {
-            name:req.body.name,
-            email:req.body.email,
-            address:req.body.address,
-            contact:req.body.contact,
+
+router.get("/admin-status" , (req , res)=>{
+    Lookup.find({Category:"EMPLOYEE_STATUS"} , (err , data)=>{
+        if (err){res.send(err)}
+        else{
+            res.send(data);
+            console.log(data)
+            console.log("Done")
         }
-        Manufacturer.findByIdAndUpdate(req.params.id, {$set: manufacturer},{new:true},(err,docs)=>{
-            if(!err)
-            {
-                res.send(docs);
-            }
-            else
-            {
-                console.log('Error in updating manufacturer : ' + JSON.stringify(err,undefined,2));
-            }
-        });  
-});
-router.delete("/:id",async(req,res)=>{
-    Manufacturer.findByIdAndDelete(req.params.id,(err,docs)=>
-    {
-        if(!err)
-        {
-            res.send(docs)
+    }
+    )
+})
+router.get("/status-loan" , (req , res)=>{
+    Lookup.find({Category:"LoanStatus"} , (err , data)=>{
+        if (err){res.send(err)}
+        else{
+            res.send(data);
+            console.log(data)
+            console.log("Done")
         }
-        else
-        {
-            console.log('Error in deleting manufacturer : ' + JSON.stringify(err,undefined,2));
-        }
-    })
-    const query = {manufacturerId : {$regex:req.params.id}}
-    Shipper.deleteMany(query,(err,docs)=>
-    {
-        if(!err)
-        {
-            console.log("Deleted successfully");
-        }
-        else
-        {
-            console.log('Error in deleting manufacturer : ' + JSON.stringify(err,undefined,2));
-        }
-    })
+    }
+    )
 })
 
 export default router;
+
