@@ -25,6 +25,7 @@ app.use("/add-manufacturer",manufacturer)
 app.use("/edit-manufacturer",manufacturer)
 app.use("/add-shipper",shipper)
 app.use("/add-pharmacy",pharmacy)
+app.use("/view-pharmacy",pharmacy)
 
 
 // Listener

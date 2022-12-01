@@ -5,4 +5,4 @@ const PharmacySchema=new mongoose.Schema({
     Location:String,
     ContactNumber:String,
 });
-export default mongoose.model("Pharmacy",PharmacySchema);
+export default mongoose.model("PharmacyDetail",PharmacySchema);
