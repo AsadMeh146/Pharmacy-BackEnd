@@ -22,7 +22,7 @@ const port = process.env.PORT || 8001;
 //MiddleWares
 app.use(express.json());
 app.use(cors());
-
+app.use("/upload-files",express.static("upload-files"))
 //Routes
 app.use("/signup",signUp)
 app.use("/signin",signin)
@@ -36,10 +36,12 @@ app.use("/get-status",lookup)
 app.use("/get-loanstatus",lookup)
 app.use("/admin",user)
 app.use("/add-employee",employee)
+app.use("/view-employee",employee)
 app.use("/add-loan",loan)
 app.use("/view-admin",admin)
 app.use("/view-loanapp",loan)
 app.use("/get-loan-status",lookup)
+
 
 
 // Listener

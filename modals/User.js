@@ -17,7 +17,8 @@ const userSchema=new mongoose.Schema({
     Status:{
         type: mongoose.Schema.Types.ObjectId,ref:'Lookup'
     },
-    image:String,
+
+    Image:String,
     HireDate:String,
     Email:String,
     ContactNumber:Number,
