@@ -38,6 +38,41 @@ router.get("/status-loan" , (req , res)=>{
     }
     )
 })
+router.get("/" ,async(req,res)=>{
+    Lookup.find({Category:"PRODUCT_CATEGORY"} ,(err,docs)=>
+    {
+        if(!err)
+        {
+            res.send(docs);
+        }
+        else
+        {
+            console.log("Error in retrieving Category : " + JSON.stringify(err,undefined,2));
+        }
+    })
+
+})
+
+router.post("/" ,async (req,res)=>{
+    console.log("Request Received")
+    let category=new Lookup(req.body);
+    let isregister
+    isregister= await category.save().then((err,res)=>{
+        if(err.body)
+        {
+            console.log("Failed")
+            return false
+        }
+        else{
+            console.log("Added successfully")
+            return true
+        }
+
+    })
+    console.log(isregister)
+
+})
+
 
 export default router;
 

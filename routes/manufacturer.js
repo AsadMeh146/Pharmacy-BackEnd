@@ -1,6 +1,7 @@
 import express from "express";
 import { isValidObjectId } from "mongoose";
 import Manufacturer from "../modals/Manufacturer.js";
+import Shipper from "../modals/Shipper.js";
 
 const router = express.Router()
 
@@ -62,6 +63,18 @@ router.delete("/:id",async(req,res)=>{
         if(!err)
         {
             res.send(docs)
+        }
+        else
+        {
+            console.log('Error in deleting manufacturer : ' + JSON.stringify(err,undefined,2));
+        }
+    })
+    const query = {manufacturerId : {$regex:req.params.id}}
+    Shipper.deleteMany(query,(err,docs)=>
+    {
+        if(!err)
+        {
+            console.log("Deleted successfully");
         }
         else
         {
