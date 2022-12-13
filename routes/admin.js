@@ -51,12 +51,92 @@ router.post('/',upload.array('image'),async(req,res)=>{
     })
 })
 
-router.get("/" ,async(req , res)=>{
-
-    user.find({}).then((user) => {
-        res.send(user)
-        console.log(user)
+router.put("/:id",async(req,res)=>{
+    var admin = {
+        Name:req.body.Name,
+        CNIC:req.body.CNIC,
+        Salary:req.body.Salary,
+        Designation:req.body.Designation,
+        DateOfBirth:req.body.DateOfBirth,
+        Address:req.body.Address,
+        PharmacyId:req.body.PharmacyId,
+        Status:req.body.Status,
+        HireDate:req.body.HireDate,
+        Email:req.body.Email,
+        ContactNumber:req.body.ContactNumber,
+     } 
+    user.findByIdAndUpdate(req.params.id,{$set:admin},{new:true},(err,data)=>{
+        if (err)
+        {res.send(err)
+        console.log("Error in updating pharmacy Data:" + JSON.stringify(err,undefined,2));
+        }
+        else{
+            res.send(data);
+            console.log("Data update successfully ")
+        }
     })
+})
+
+
+router.delete("/:id",async(req,res)=>{
+    user.findByIdAndDelete(req.params.id,(err,docs)=>
+    {
+        if(!err)
+        {
+            console.log("successfully deleted")
+            res.send(docs)
+        }
+        else
+        {
+            console.log('Error in deleting product : ' + JSON.stringify(err,undefined,2));
+        }
+    })
+    
+})
+
+router.get("/" ,async(req , res)=>{
+    user.aggregate([
+        {
+          $lookup: {
+            from: "lookups",
+            localField: "Designation",
+            foreignField: "_id",
+            as: "Designation"
+          }
+        },
+        {
+          $unwind: "$Designation"
+        },
+        {
+            $lookup: {
+              from: "pharmacydetails",
+              localField: "PharmacyId",
+              foreignField: "_id",
+              as: "Pharmacy"
+            }
+          },
+          {
+            $unwind: "$Pharmacy"
+          },
+          {
+            $lookup: {
+              from: "lookups",
+              localField: "Status",
+              foreignField: "_id",
+              as: "Status"
+            }
+          },
+          {
+            $unwind: "$Status"
+          },
+    ])
+
+    .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        res.send(error);
+      })
     
 
 })

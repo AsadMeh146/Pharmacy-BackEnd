@@ -14,6 +14,7 @@ import employee from "./routes/employee.js"
 import loan from "./routes/loan.js"
 import admin from "./routes/admin.js"
 import stock from "./routes/stock.js"
+import customer from "./routes/customer.js"
 
 //App Config
 const app = express();
@@ -43,11 +44,13 @@ app.use("/view-employee",employee)
 app.use("/add-loan",loan)
 app.use("/view-loanapp",loan)
 app.use("/get-loan-status",lookup)
+app.use("/get-designation",lookup)
 app.use("/add-category",lookup)
 app.use("/get-product-category",lookup)
 app.use("/add-product",stock)
 app.use("/get-product",stock)
 app.use("/edit-product",stock)
+app.use("/addcustomer",customer)
 
 
 

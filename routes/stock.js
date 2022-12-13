@@ -17,7 +17,8 @@ router.get("/" ,async(req,res)=>{
         {
           $unwind: "$category"
         },
-        { $match: { $expr : { $eq: [ '$pharmacyId' , { $toObjectId: "6380920946c6abc3c48115dc" } ] } } },
+        { $match: { $expr : { $eq: [ '$pharmacyId' , { $toObjectId: "6380920946c6abc3c48115dc" } ] } } }
+        ,
       ])
         .then((result) => {
           res.send(result);
@@ -67,6 +68,7 @@ router.put("/:id" ,async(req,res)=>{
             }
         });  
 });
+
 router.delete("/:id",async(req,res)=>{
     Stock.findByIdAndDelete(req.params.id,(err,docs)=>
     {
