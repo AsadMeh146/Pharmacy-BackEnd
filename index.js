@@ -50,6 +50,7 @@ app.use("/get-product-category",lookup)
 app.use("/add-product",stock)
 app.use("/get-product",stock)
 app.use("/edit-product",stock)
+app.use("/order-stock",stock)
 app.use("/addcustomer",customer)
 
 

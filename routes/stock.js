@@ -1,6 +1,7 @@
 import express from "express";
 import { isValidObjectId } from "mongoose";
 import Stock from "../modals/Stock.js";
+import StockOrder from "../modals/StockOrder.js";
 
 const router = express.Router()
 // have to add pharmacy Id dynamically
@@ -82,6 +83,25 @@ router.delete("/:id",async(req,res)=>{
         }
     })
     
+});
+router.post("/ordered" ,async (req,res)=>{
+    console.log("Request Received")
+    let stockOrder=new StockOrder(req.body);
+    let isregister
+    isregister= await stockOrder.save().then((err,res)=>{
+        if(err.body)
+        {
+            console.log("Failed")
+            return false
+        }
+        else{
+            console.log("Added successfully")
+            return true
+        }
+
+    })
+    res.send(isregister)
+
 })
 
 export default router;

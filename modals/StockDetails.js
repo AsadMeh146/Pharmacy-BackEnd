@@ -8,6 +8,5 @@ const stockDetailsSchema=new mongoose.Schema({
     salePrice:Number,
     manufacturingDate:Date,
     expiryDate:Date,
-    
 });
 export default mongoose.model("StockDetail",stockDetailSchema);
