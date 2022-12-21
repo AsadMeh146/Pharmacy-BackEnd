@@ -4,7 +4,8 @@ import { isValidObjectId } from "mongoose";
 
 
 import Pharmacy from "../modals/Pharmacy.js";
-
+import user from "../modals/User.js";
+import stock from "../modals/Stock.js";
 const router = express.Router()
 
 
@@ -74,6 +75,25 @@ router.delete("/:Id",async(req,res)=>{
         else{
             res.send(data);
             console.log("Deleted successfully");
+            user.deleteMany({PharmacyId:{$gte: req.params.Id}},function(err,docs){
+                if(err){
+                    console.lof(err)
+                }
+                else{
+                    console.log("delete pharmacy:",docs);
+                }
+            }
+            );
+            stock.deleteMany({pharmacyId:{$gte: req.params.Id}},function(err,docs){
+                if(err){
+                    console.lof(err)
+                }
+                else{
+                    console.log("deleted stock pharmacy Id:",docs);
+                }
+            }
+            )
+
         }
     })
 })

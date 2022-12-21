@@ -4,9 +4,11 @@ const stockDetailsSchema=new mongoose.Schema({
     stockId:{
         type: mongoose.Schema.Types.ObjectId,ref:'Stock'
     },
-    purchasePrice:Number,
-    salePrice:Number,
-    manufacturingDate:Date,
+    manufacturerDate:Date,
     expiryDate:Date,
+    unitPrice:Number,
+    salePrice:Number,
+    quantity:Number
+ 
 });
-export default mongoose.model("StockDetail",stockDetailSchema);
+export default mongoose.model("StockDetail",stockDetailsSchema);

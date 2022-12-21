@@ -42,7 +42,7 @@ router.post('/',upload.array('image'),async(req,res)=>{
     .save((err,doc)=>{
         if(!err){
             console.log("details saved");
-            res.send(doc);
+            res.send(true);
         }
         else{
             console.log("details not saved" + JSON.stringify(err,undefined,2));
@@ -114,7 +114,8 @@ router.put("/:id",async(req,res)=>{
     
 // })
 
-router.get("/" ,async(req , res)=>{
+
+router.get("/:id" ,async(req , res)=>{
     user.aggregate([
         {
           $lookup: {
@@ -149,6 +150,8 @@ router.get("/" ,async(req , res)=>{
           {
             $unwind: "$Status"
           },
+          { $match: { $expr : { $eq: [ '$PharmacyId' , { $toObjectId: req.params.id } ] } } }
+          ,
     ])
           .then((result) => {
             res.send(result);
@@ -164,4 +167,54 @@ router.get("/" ,async(req , res)=>{
     // })
 })
 
+router.get("/" ,async(req , res)=>{
+  user.aggregate([
+      {
+        $lookup: {
+          from: "lookups",
+          localField: "Designation",
+          foreignField: "_id",
+          as: "Designation"
+        }
+      },
+      {
+        $unwind: "$Designation"
+      },
+      {
+          $lookup: {
+            from: "pharmacydetails",
+            localField: "PharmacyId",
+            foreignField: "_id",
+            as: "Pharmacy"
+          }
+        },
+        {
+          $unwind: "$Pharmacy"
+        },
+        {
+          $lookup: {
+            from: "lookups",
+            localField: "Status",
+            foreignField: "_id",
+            as: "Status"
+          }
+        },
+        {
+          $unwind: "$Status"
+        },
+        
+  ])
+        .then((result) => {
+          res.send(result);
+        })
+        .catch((error) => {
+          res.send(error);
+        })
+    
+
+  // user.find({}).then((user) => {
+  //     res.send(user)
+  //     console.log(user)
+  // })
+})
 export default router;
