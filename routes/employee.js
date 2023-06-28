@@ -61,7 +61,7 @@ router.delete("/:id",async(req,res)=>{
         }
         else
         {
-            console.log('Error in deleting product : ' + JSON.stringify(err,undefined,2));
+            console.log('Error in deleting employee : ' + JSON.stringify(err,undefined,2));
         }
     })
     
@@ -92,28 +92,6 @@ router.put("/:id",async(req,res)=>{
         }
     })
 })
-
-// router.post("/" ,async (req,res)=>{
-//     console.log("Request Received")
-//     let employee=new user(req.body);
-//     let isEmployeeAdd
-//     isEmployeeAdd= await employee.save().then((err,res)=>{
-//         if(err.body)
-//         {
-//             console.log("Employee details not added")
-//             return false
-//         }
-//         else{
-//             console.log("Added successfully")
-//             return true
-//         }
-
-//     })
-//     console.log("Done")
-//     res.send(isEmployeeAdd)
-    
-// })
-
 
 router.get("/:id" ,async(req , res)=>{
     user.aggregate([
@@ -160,61 +138,6 @@ router.get("/:id" ,async(req , res)=>{
             res.send(error);
           })
       
-
-    // user.find({}).then((user) => {
-    //     res.send(user)
-    //     console.log(user)
-    // })
 })
 
-router.get("/" ,async(req , res)=>{
-  user.aggregate([
-      {
-        $lookup: {
-          from: "lookups",
-          localField: "Designation",
-          foreignField: "_id",
-          as: "Designation"
-        }
-      },
-      {
-        $unwind: "$Designation"
-      },
-      {
-          $lookup: {
-            from: "pharmacydetails",
-            localField: "PharmacyId",
-            foreignField: "_id",
-            as: "Pharmacy"
-          }
-        },
-        {
-          $unwind: "$Pharmacy"
-        },
-        {
-          $lookup: {
-            from: "lookups",
-            localField: "Status",
-            foreignField: "_id",
-            as: "Status"
-          }
-        },
-        {
-          $unwind: "$Status"
-        },
-        
-  ])
-        .then((result) => {
-          res.send(result);
-        })
-        .catch((error) => {
-          res.send(error);
-        })
-    
-
-  // user.find({}).then((user) => {
-  //     res.send(user)
-  //     console.log(user)
-  // })
-})
 export default router;

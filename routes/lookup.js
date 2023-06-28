@@ -9,8 +9,7 @@ router.get("/admin-designation" , (req , res)=>{
         if (err){res.send(err)}
         else{
             res.send(data);
-            console.log(data)
-            console.log("Done")
+
         }
     }
     )
@@ -21,8 +20,7 @@ router.get("/admin-status" , (req , res)=>{
         if (err){res.send(err)}
         else{
             res.send(data);
-            console.log(data)
-            console.log("Done")
+
         }
     }
     )
@@ -32,8 +30,7 @@ router.get("/status-loan" , (req , res)=>{
         if (err){res.send(err)}
         else{
             res.send(data);
-            console.log(data)
-            console.log("Done")
+
         }
     }
     )

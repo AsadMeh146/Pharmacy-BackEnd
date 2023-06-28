@@ -23,20 +23,7 @@ router.post("/" ,async (req,res)=>{
     res.send(isregister)
 
 })
-// router.get("/:email",async(req,res)=>{
-//     console.log("Request is received for getting data with email "+req.params.email)
-//     let isvalid
-//     isvalid=await User.findOne({email:req.params.email})
-//     if(isvalid)
-//     {
-//         res.send(true)
-//         console.log("Result:true")
-//     }
-//     else{
-//         res.send(false)
-//         console.log("Result:false")
-//     }
-// })
+
 
 
 export default router;

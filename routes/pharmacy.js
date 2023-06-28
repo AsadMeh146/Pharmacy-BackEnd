@@ -39,7 +39,7 @@ router.get("/" ,async(req , res)=>{
         }
         else{
             res.send(data);
-            console.log("Done!")
+
         }
     }
     )
@@ -86,10 +86,10 @@ router.delete("/:Id",async(req,res)=>{
             );
             stock.deleteMany({pharmacyId:{$gte: req.params.Id}},function(err,docs){
                 if(err){
-                    console.lof(err)
+                    console.log(err)
                 }
                 else{
-                    console.log("deleted stock pharmacy Id:",docs);
+                    console.log("Deleted stock pharmacy Id:",docs);
                 }
             }
             )
