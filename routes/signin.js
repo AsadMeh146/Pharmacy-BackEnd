@@ -7,14 +7,11 @@ const router = express.Router()
 router.get("/:email/:password" , (req , res)=>{
     const email = req.params.email;
     const password = req.params.password;
-    console.log("email from front end" , email)
-    console.log("password from front end" , password)
     console.log("ENTERED")
     User.find({Email:email ,PIN:password} , (err , data)=>{
         if (err){res.send(err)}
         else{
             res.send(data);
-            console.log(data)
             console.log("Done")
         }
     }

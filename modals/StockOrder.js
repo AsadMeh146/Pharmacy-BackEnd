@@ -1,18 +1,19 @@
 import mongoose from "mongoose";
 
 const stockOrderSchema=new mongoose.Schema({
-    name:String,
-    category:{
-        type: mongoose.Schema.Types.ObjectId,ref:'Lookup'
+    orderId:String,
+    manufacturerId:{
+        type: mongoose.Schema.Types.ObjectId,ref:'ManufacturerDetail'
     },
-    purchasePrice:String,
-    salePrice:String,
-    description:String,
-    manufacturerName:String,
-    manufacturingDate:String,
-    expiryDate:String,
+    shipperId:{
+        type: mongoose.Schema.Types.ObjectId,ref:'ShipperDetail'
+    },
+    productDetails:Object    
+    ,
+    orderDate:Date,
+    shipDate:Date,
     pharmacyId:{
         type: mongoose.Schema.Types.ObjectId,ref:'PharmacyDetail'
     }
 });
-export default mongoose.model("StockOrderDetail",stockOrderSchema);
+export default mongoose.model("StockOrder",stockOrderSchema);

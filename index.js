@@ -14,7 +14,8 @@ import employee from "./routes/employee.js"
 import loan from "./routes/loan.js"
 import admin from "./routes/admin.js"
 import stock from "./routes/stock.js"
-import customer from "./routes/customer.js"
+import customer from "./routes/customerOrder.js"
+
 
 //App Config
 const app = express();
@@ -37,8 +38,9 @@ app.use("/view-pharmacy",pharmacy)
 app.use("/get-designation",lookup)
 app.use("/get-status",lookup)
 app.use("/get-loanstatus",lookup)
-app.use("/admin",user)
+app.use("/add-admin",user)
 app.use("/view-admin",admin)
+app.use("/view-user",employee)
 app.use("/add-employee",employee)
 app.use("/view-employee",employee)
 app.use("/add-loan",loan)
@@ -50,7 +52,9 @@ app.use("/get-product-category",lookup)
 app.use("/add-product",stock)
 app.use("/get-product",stock)
 app.use("/edit-product",stock)
-app.use("/addcustomer",customer)
+app.use("/order-stock",stock)
+app.use("/receive-stock",stock)
+app.use("/customer-order",customer)
 
 
 
